@@ -20,9 +20,11 @@ app.use(bodyParser.json());
 app.use(cors(corsOption));
 const port = process.env.PORT || 3000;
 const posts = {};
+const events = [];
 app.post("/events", (req, res) => {
     const event = req.body;
-    ; //comments
+    events.push(event);
+    //comments
     axios.post("http://localhost:4001/events", event).catch((err) => {
         console.log(err.message);
     });
@@ -40,13 +42,8 @@ app.post("/events", (req, res) => {
     });
     res.send({ status: 'OK' });
 });
-app.get("/posts", (req, res) => {
-    console.log("post : ", posts);
-    res.send(posts);
-});
-app.post("/events", (req, res) => {
-    console.log("Received Event", req.body.type);
-    res.send({});
+app.get("/events", (req, res) => {
+    res.send(events);
 });
 app.listen(port, () => {
     console.log(`[server]: Server is running at http://localhost:${port}`);
