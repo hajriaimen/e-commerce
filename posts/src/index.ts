@@ -27,11 +27,12 @@ app.get("/posts", (req: Request, res: Response) => {
   res.send(posts);
 });
 
-app.post("/posts", async(req: Request, res: Response) => {
+app.post("/posts/create", async(req: Request, res: Response) => {
   let id =   crypto.randomUUID(); 
   const { title } = req.body;
   posts[id] = { id, title };
-  await axios.post("http://localhost:4005/events", {
+  
+  await axios.post("http://event-bus-srv:4005/events", {
     type: "PostCreated",
     data: {
       id,
@@ -48,5 +49,6 @@ app.post("/events", (req: Request, res: Response) => {
     res.send({}); 
 })
 app.listen(port, () => {
+  console.log('version k8S latest');
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });

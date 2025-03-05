@@ -1,0 +1,41 @@
+apiVersion: skaffold/v4beta12
+kind: Config
+metadata:
+  name: e-commerce
+build:
+  artifacts:
+    - image: sparky/client
+      context: client-commerce
+      docker:
+        dockerfile: Dockerfile
+    - image: sparky/comments
+      context: comments
+      docker:
+        dockerfile: Dockerfile
+    - image: sparky/event-bus
+      context: event-bus
+      docker:
+        dockerfile: Dockerfile
+    - image: sparky/moderation
+      context: moderation
+      docker:
+        dockerfile: Dockerfile
+    - image: sparky/posts
+      context: posts
+      docker:
+        dockerfile: Dockerfile
+    - image: sparky/query
+      context: query
+      docker:
+        dockerfile: Dockerfile
+manifests:
+  rawYaml:
+    - infra/k8s/client-depl.yaml
+    - infra/k8s/comments-depl.yaml
+    - infra/k8s/event-bus-depl.yaml
+    - infra/k8s/ingress-srv.yaml
+    - infra/k8s/moderation-depl.yaml
+    - infra/k8s/posts-depl.yaml
+    - infra/k8s/posts-srv.yaml
+    - infra/k8s/posts.yaml
+    - infra/k8s/query-depl.yaml

@@ -34,7 +34,7 @@ app.post("/events", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     if (type === "CommentCreated") {
         const { id, content, postId } = data;
         const status = content.includes("orange") ? "rejected" : "approved";
-        yield axios_1.default.post("http://localhost:4005/events", {
+        yield axios_1.default.post("http://event-bus-srv:4005/events", {
             type: "CommentModerated",
             data: {
                 id,

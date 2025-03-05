@@ -25,23 +25,24 @@ app.post("/events", (req: Request, res: Response) => {
   const event = req.body;
   events.push(event);
 
-   //comments
-  axios.post("http://localhost:4001/events", event).catch((err) => {
-    console.log(err.message);
-  });
 
   //posts
-  axios.post("http://localhost:4000/events", event).catch((err) => {
+  axios.post("http://posts-clusterip-srv:4000/events", event).catch((err) => {
     console.log(err.message);
   }); 
 
+   //comments
+  axios.post("http://comments-srv:4001/events", event).catch((err) => {
+    console.log(err.message);
+  });
+
   //query
-  axios.post("http://localhost:4002/events", event).catch((err) => {
+  axios.post("http://query-srv:4002/events", event).catch((err) => {
     console.log(err.message);
   });
 
     //moderation
-    axios.post("http://localhost:4003/events", event).catch((err) => {
+    axios.post("http://moderation-srv:4003/events", event).catch((err) => {
       console.log(err.message);
     });
   

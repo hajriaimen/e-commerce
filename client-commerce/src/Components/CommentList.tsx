@@ -7,12 +7,12 @@ export interface Comment {
 }
 
 interface CommentListProps {
-  comments: Comment[];
+  comments: Comment[] ;
 }
 
 const CommentList: React.FC<CommentListProps> = ({ comments }) => {
 
-  const renderedComments = comments.map((comment) => {
+  const renderedComments = comments?.map((comment) => {
     let content;
     switch (comment.status) {
       case "pending":

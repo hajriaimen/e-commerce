@@ -13,7 +13,7 @@ const PostList: React.FC = () => {
   const [posts, setPosts] = useState<{ [key: string]: Post }>({});
 
   const fetchPosts = async () => {
-    const response = await axios.get<{ [key: string]: Post }>("http://localhost:4002/posts");
+    const response = await axios.get<{ [key: string]: Post }>("http://posts.com/posts");
     console.log(response.data);
     setPosts(response.data);
   };

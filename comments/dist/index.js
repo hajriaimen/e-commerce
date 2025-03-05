@@ -38,7 +38,7 @@ app.post("/posts/:id/comments", (req, res) => __awaiter(void 0, void 0, void 0, 
     const comments = commentsByPostId[req.params.id] || [];
     comments.push({ id: commentId, content, status: "pending" });
     commentsByPostId[req.params.id] = comments;
-    yield axios.post("http://localhost:4005/events", {
+    yield axios.post("http://event-bus-srv:4005/events", {
         type: "CommentCreated",
         data: {
             id: commentId,
@@ -60,7 +60,7 @@ app.post("/events", (req, res) => __awaiter(void 0, void 0, void 0, function* ()
             return comment.id === id;
         });
         comment.status = status;
-        yield axios.post("http://localhost:4005/events", {
+        yield axios.post("http://event-bus-srv:4005/events", {
             type: 'CommentUpdated',
             data: {
                 id,
